@@ -37,4 +37,6 @@
     height: var(--gff-content-height);
     align-items: var(--gff-content-alignX);
     justify-content: var(--gff-content-alignY);
+    padding: var(--gff-content-padding);
+    gap: var(--gff-content-gap);
 }
