@@ -3,51 +3,68 @@
 {{ 'gff-javascript.js' | asset_url | script_tag }}
 
 {%- liquid
-  assign sectionId = section.id
+    assign sectionId = section.id
 -%}
 
 {%- style -%}
-  [data-gff-section="{{ sectionId }}"] {
+    [data-gff-section="{{ sectionId }}"] {
     --gff-content-height: {{ section.settings.height }}vh;
     --gff-mask-opacity: {{ section.settings.maskOpacity }};
     --gff-content-padding: {{ section.settings.contentPadding }}rem;
     --gff-content-gap: {{ section.settings.contentGap }}rem;
     --gff-content-alignX: {{ section.settings.contentAlignX | default: "start" }};
     --gff-content-alignY: {{ section.settings.contentAlignY | default: "start" }};
-  }
+    }
 {%- endstyle -%}
 
 <section
-    data-gff-section="{{ sectionId }}"
-    class="gff-section gff-hero-video color-{{ section.settings.color_scheme }} gradient"
+        data-gff-section="{{ sectionId }}"
+        class="gff-section gff-hero-video color-{{ section.settings.color_scheme }} gradient"
 >
     <div class="gff-hero-video-wrapper">
         {% unless section.settings.video == null %}
             {{
-                section.settings.video
-                | video_tag:
-                    image_size: '1100x',
-                    autoplay: true,
-                    loop: true,
-                    controls: false,
-                    muted: true,
-                    preload: 'none'
+            section.settings.video
+              | video_tag:
+                image_size: '1100x',
+                autoplay: true,
+                loop: true,
+                controls: false,
+                muted: true,
+                preload: 'none'
             }}
         {% endunless %}
         <div data-gff-section="{{ sectionId }}" class="gff-hero-video-content">
-          {% for block in section.blocks %}
-            {% if block.type == '@app' %}
-              <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-                {% render block %}
-              </div>
-            {% else %}
-              <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                {{ block.shopify_attributes }}
-              >
-                {% render "${block.type}", block: block %}
-              </div>
-            {% endif %}
-          {% endfor %}
+            {% for block in section.blocks %}
+                {% case block.type %}
+                    {% when '@app' %}
+                        <div data-gff-block="{{ block.id }}"
+                             class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                            {% render block %}
+                        </div>
+                    {% when 'gff-heading' %}
+                        <div data-gff-block="{{ block.id }}"
+                             class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                {{ block.shopify_attributes }}
+                        >
+                            {% render 'gff-heading', block: block %}
+                        </div>
+                    {% when 'gff-text' %}
+                        <div data-gff-block="{{ block.id }}"
+                             class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                {{ block.shopify_attributes }}
+                        >
+                            {% render 'gff-text', block: block %}
+                        </div>
+                    {% when 'gff-button' %}
+                        <div data-gff-block="{{ block.id }}"
+                             class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                {{ block.shopify_attributes }}
+                        >
+                            {% render 'gff-button', block: block %}
+                        </div>
+                {% endcase %}
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -58,7 +75,10 @@
   "class": "gff-hero-video",
   "tag": "section",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "settings": [
     {
