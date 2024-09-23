@@ -19,7 +19,7 @@
     data-gff-section="{{ sectionId }}"
     class="gff-section gff-hero-video color-{{ section.settings.color_scheme }} gradient"
 >
-    <div class="gff-video-wrapper">
+    <div class="gff-hero-video-wrapper">
         {% unless section.settings.video == null %}
             {{
                 section.settings.video
@@ -32,7 +32,7 @@
                     preload: 'none'
             }}
         {% endunless %}
-        <div class="gff-video-content">
+        <div class="gff-hero-video-content">
           {% for block in section.blocks %}
             {% case block.type %}
                 {% when '@app' %}
