@@ -3,17 +3,24 @@
 {{ 'gff-javascript.js' | asset_url | script_tag }}
 
 {%- liquid
-    assign sectionid = section.id
+  assign sectionid = section.id
 
-    assign video_id = section.settings.video.id | default: section.settings.video_url.id
-    assign video_alt = section.settings.video.alt | default: section.settings.description
-    assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+  assign height = section.settings.height
+  assign video_id = section.settings.video.id | default: section.settings.video_url.id
+  assign video_alt = section.settings.video.alt | default: section.settings.description
+  assign alt = 'sections.video.load_video' | t: description: video_alt | escape
 
 -%}
 
 {%- comment -%}
     assign poster = section.settings.video.preview_image | default: section.settings.cover_image
 {%- endcomment -%}
+
+{%- style -%}
+  [data-gff-section="{{ sectionId }}"] {
+    --gff-content-height: {{ height }}vh;
+  }
+{%- endstyle -%}
 
 <section
     data-gff-section="{{ sectionId }}"
@@ -32,7 +39,7 @@
                     preload: 'none'
             }}
         {% endunless %}
-        <div class="gff-hero-video-content">
+        <div data-gff-section="{{ sectionId }}" class="gff-hero-video-content">
           {% for block in section.blocks %}
             {% case block.type %}
                 {% when '@app' %}
@@ -60,6 +67,15 @@
       "label": "t:sections.video.settings.video.label"
     },
     {
+      "type": "range",
+      "id": "height",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "label": "Height",
+      "default": 50
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -76,6 +92,9 @@
     {
       "name": "GFF | Hero Video",
       "category": "Text",
+      "settings": {
+        "height": 50
+      },
       "blocks": []
     }
   ]

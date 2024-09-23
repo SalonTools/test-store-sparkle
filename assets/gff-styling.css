@@ -1,7 +1,9 @@
 /** /assets/gff-styling.css */
 .gff {}
 
-.gff-hero-video {}
+.gff-hero-video {
+    --gff-content-height: 50vh;
+}
 .gff-hero-video-wrapper {
     position: relative;
 }
@@ -14,4 +16,5 @@
 .gff-hero-video-content {
     display: flex;
     flex-direction: column;
+    height: var(--gff-content-height);
 }
