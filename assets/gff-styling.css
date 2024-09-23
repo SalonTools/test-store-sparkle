@@ -41,6 +41,9 @@
     padding: var(--gff-content-padding);
     gap: var(--gff-content-gap);
 }
+.gff-desktop .gff-hero-video-content {
+    padding: calc(2 * var(--gff-content-padding));
+}
 .gff-text-content {
     margin: 0;
     line-height: 1;
