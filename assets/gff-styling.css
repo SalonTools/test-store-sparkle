@@ -3,6 +3,8 @@
 
 .gff-hero-video {
     --gff-content-height: 50vh;
+    --gff-mask-background: #000;
+    --gff-mask-opacity: 0.3;
 }
 .gff-hero-video-wrapper {
     position: relative;
@@ -13,7 +15,18 @@
     height: 100%;
     object-fit: cover;
 }
+.gff-hero-video-wrapper:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--gff-mask-background);
+    opacity: var(--gff-mask-opacity);
+}
 .gff-hero-video-content {
+    z-index: 2;
     display: flex;
     flex-direction: column;
     height: var(--gff-content-height);

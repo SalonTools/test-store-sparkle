@@ -4,12 +4,6 @@
 
 {%- liquid
   assign sectionId = section.id
-
-  assign height = section.settings.height
-  assign video_id = section.settings.video.id | default: section.settings.video_url.id
-  assign video_alt = section.settings.video.alt | default: section.settings.description
-  assign alt = 'sections.video.load_video' | t: description: video_alt | escape
-
 -%}
 
 {%- comment -%}
@@ -18,7 +12,8 @@
 
 {%- style -%}
   [data-gff-section="{{ sectionId }}"] {
-    --gff-content-height: {{ height }}vh;
+    --gff-content-height: {{ section.settings.height }}vh;
+    --gff-mask-opacity: {{ section.settings.maskOpacity }};
   }
 {%- endstyle -%}
 
@@ -76,6 +71,15 @@
       "default": 50
     },
     {
+      "type": "range",
+      "id": "maskOpacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Mask Opacity",
+      "default": 0.3
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -93,7 +97,8 @@
       "name": "GFF | Hero Video",
       "category": "Text",
       "settings": {
-        "height": 50
+        "height": 50,
+        "maskOpacity": 0.3
       },
       "blocks": []
     }
