@@ -1,0 +1,12 @@
+<div class="gff-block gff-button-block">
+    <a
+        {% if block.settings.link %}
+            href="{{ block.settings.link }}"
+        {% else %}
+            role="link" aria-disabled="true"
+        {% endif %}
+        class="button {% if block.settings.outline %}button--secondary{% else %}button--primary{% endif %}"
+    >
+        {{- block.settings.label | escape -}}
+    </a>
+</div>

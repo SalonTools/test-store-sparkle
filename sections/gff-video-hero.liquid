@@ -45,6 +45,12 @@
                   <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
                     {% render block %}
                   </div>
+                {% when 'gff-button' %}
+                  <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {{ block.shopify_attributes }}
+                  >
+                    {% render 'gff-button', block: block %}
+                  </div>
                 {% when 'gff-heading' %}
                   <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                     {{ block.shopify_attributes }}
@@ -158,6 +164,29 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "gff-button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Click Me"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "outline",
+          "label": "Outline",
+          "default": false
+        }
+      ]
     },
     {
       "type": "gff-heading",
