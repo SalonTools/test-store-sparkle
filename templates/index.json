@@ -41,11 +41,20 @@
             "top_padding": 0,
             "bottom_padding": 0
           }
+        },
+        "gff_button_tawVkC": {
+          "type": "gff-button",
+          "settings": {
+            "label": "Click Me",
+            "link": "shopify://products/hair-and-scalp-recovery-elixir",
+            "outline": true
+          }
         }
       },
       "block_order": [
         "gff_heading_7keNcb",
-        "flexi_theme_library_buttons_block_bdU6Cp"
+        "flexi_theme_library_buttons_block_bdU6Cp",
+        "gff_button_tawVkC"
       ],
       "settings": {
         "video": "shopify://files/videos/landscape website.mp4",
@@ -55,7 +64,7 @@
         "contentPadding": 6.5,
         "contentAlignX": "center",
         "contentAlignY": "end",
-        "color_scheme": "scheme-5"
+        "color_scheme": "scheme-2"
       }
     },
     "image_banner": {
