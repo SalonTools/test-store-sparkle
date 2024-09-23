@@ -9,6 +9,7 @@
     --gff-content-alignY: start;
     --gff-mask-background: #000;
     --gff-mask-opacity: 0.3;
+    --gff-text-shadow: 1px 1px 3px var(--gradient-background);
 }
 .gff-hero-video-wrapper {
     position: relative;
@@ -40,12 +41,12 @@
     padding: var(--gff-content-padding);
     gap: var(--gff-content-gap);
 }
-.gff-heading-block .title {
+.gff-text-content {
     margin: 0;
-}
-.gff-text-block .gff-text-paragraph {
-    background: pink;
+    line-height: 1;
+    text-shadow: var(--gff-text-shadow);
 }
 .gff-text-block .gff-text-subtitle {
-    background: pink;
+    text-transform: uppercase;
+    font-size: 0.9em;
 }
