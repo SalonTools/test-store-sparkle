@@ -3,7 +3,7 @@
 {{ 'gff-javascript.js' | asset_url | script_tag }}
 
 {%- liquid
-  assign sectionid = section.id
+  assign sectionId = section.id
 
   assign height = section.settings.height
   assign video_id = section.settings.video.id | default: section.settings.video_url.id
