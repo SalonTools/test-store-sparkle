@@ -14,6 +14,10 @@
   [data-gff-section="{{ sectionId }}"] {
     --gff-content-height: {{ section.settings.height }}vh;
     --gff-mask-opacity: {{ section.settings.maskOpacity }};
+    --gff-content-padding: {{ section.settings.contentPadding }}rem;
+    --gff-content-gap: {{ section.settings.contentGap }}rem;
+    --gff-content-alignX: {{ section.settings.contentAlignX | default: "start" }};
+    --gff-content-alignY: {{ section.settings.contentAlignY | default: "start" }};
   }
 {%- endstyle -%}
 
@@ -80,6 +84,64 @@
       "default": 0.3
     },
     {
+      "type": "range",
+      "id": "contentGap",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "label": "Content Gap",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "contentPadding",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "label": "Content Padding",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "contentAlignX",
+      "label": "Content Align Left/Right",
+      "default": "start",
+      "options": [
+        {
+          "value": "start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "contentAlignY",
+      "label": "Content Align Top/Bottom",
+      "default": "end",
+      "options": [
+        {
+          "value": "start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "Bottom"
+        }
+      ]
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -98,7 +160,9 @@
       "category": "Text",
       "settings": {
         "height": 50,
-        "maskOpacity": 0.3
+        "maskOpacity": 0.3,
+        "contentGap": 1,
+        "contentPadding": 2
       },
       "blocks": []
     }

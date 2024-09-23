@@ -3,6 +3,10 @@
 
 .gff-hero-video {
     --gff-content-height: 50vh;
+    --gff-content-padding: 2rem;
+    --gff-content-gap: 1rem;
+    --gff-content-alignX: start;
+    --gff-content-alignY: start;
     --gff-mask-background: #000;
     --gff-mask-opacity: 0.3;
 }
@@ -27,7 +31,10 @@
 }
 .gff-hero-video-content {
     z-index: 2;
+    position: relative;
     display: flex;
     flex-direction: column;
     height: var(--gff-content-height);
+    align-items: var(--gff-content-alignX);
+    justify-content: var(--gff-content-alignY);
 }
