@@ -15,37 +15,21 @@
         "gff_heading_7keNcb": {
           "type": "gff-heading",
           "settings": {
-            "heading": "Heading Content",
+            "heading": "GF Fabulosity",
             "heading_size": "hxl"
           }
         },
-        "flexi_theme_library_buttons_block_bdU6Cp": {
-          "type": "shopify://apps/flexi-theme-library/blocks/buttons-block/5a4df4d6-1efe-4f41-80b3-12e6a6deefaf",
+        "gff_text_HPbaEE": {
+          "type": "gff-text",
           "settings": {
-            "first_button_text": "Shop Elixir",
-            "first_button_url": "shopify://products/hair-and-scalp-recovery-elixir",
-            "btn_1_style": "primary",
-            "second_button_text": "",
-            "second_button_url": "",
-            "btn_2_style": "primary",
-            "third_button_text": "",
-            "third_button_url": "",
-            "btn_3_style": "primary",
-            "btn_size": "10px 24px",
-            "justify_content": "left",
-            "font_color": "#ffffff",
-            "display_options": "bl-hide-none",
-            "full_width": false,
-            "flex_direction": false,
-            "gap": 12,
-            "top_padding": 0,
-            "bottom_padding": 0
+            "text": "Something really exciting about the brand",
+            "displayAs": "paragraph"
           }
         },
         "gff_button_tawVkC": {
           "type": "gff-button",
           "settings": {
-            "label": "Click Me",
+            "label": "Shop Elixir",
             "link": "shopify://products/hair-and-scalp-recovery-elixir",
             "outline": true
           }
@@ -53,7 +37,7 @@
       },
       "block_order": [
         "gff_heading_7keNcb",
-        "flexi_theme_library_buttons_block_bdU6Cp",
+        "gff_text_HPbaEE",
         "gff_button_tawVkC"
       ],
       "settings": {
@@ -61,8 +45,8 @@
         "height": 70,
         "maskOpacity": 0.2,
         "contentGap": 1,
-        "contentPadding": 6.5,
-        "contentAlignX": "center",
+        "contentPadding": 3,
+        "contentAlignX": "start",
         "contentAlignY": "end",
         "color_scheme": "scheme-5"
       }
