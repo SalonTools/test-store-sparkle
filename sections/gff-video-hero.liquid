@@ -6,10 +6,6 @@
   assign sectionId = section.id
 -%}
 
-{%- comment -%}
-    assign poster = section.settings.video.preview_image | default: section.settings.cover_image
-{%- endcomment -%}
-
 {%- style -%}
   [data-gff-section="{{ sectionId }}"] {
     --gff-content-height: {{ section.settings.height }}vh;
@@ -48,7 +44,7 @@
               <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                 {{ block.shopify_attributes }}
               >
-                {% render block.type, block: block %}
+                {% render "#{block.type}", block: block %}
               </div>
             {% endif %}
           {% endfor %}
