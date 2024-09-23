@@ -26,7 +26,7 @@
             "btn_3_style": "primary",
             "btn_size": "10px 24px",
             "justify_content": "left",
-            "font_color": "#FFFFFF",
+            "font_color": "#ffffff",
             "display_options": "bl-hide-none",
             "full_width": false,
             "flex_direction": false,
@@ -41,7 +41,13 @@
       ],
       "settings": {
         "video": "shopify://files/videos/landscape website.mp4",
-        "color_scheme": ""
+        "height": 70,
+        "maskOpacity": 0.2,
+        "contentGap": 1,
+        "contentPadding": 1,
+        "contentAlignX": "center",
+        "contentAlignY": "end",
+        "color_scheme": "scheme-5"
       }
     },
     "image_banner": {
