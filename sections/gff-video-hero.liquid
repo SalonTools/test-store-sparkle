@@ -1,0 +1,87 @@
+<!-- /sections/gff-hero-video.liquid -->
+{{ 'gff-styling.css' | asset_url | stylesheet_tag }}
+{{ 'gff-javascript.js' | asset_url | script_tag }}
+
+{%- liquid
+    assign sectionid = section.id
+
+    assign video_id = section.settings.video.id | default: section.settings.video_url.id
+    assign video_alt = section.settings.video.alt | default: section.settings.description
+    assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+
+-%}
+
+{%- comment -%}
+    assign poster = section.settings.video.preview_image | default: section.settings.cover_image
+{%- endcomment -%}
+
+<section
+    data-gff-section="{{ sectionId }}"
+    class="gff-section gff-hero-video color-{{ section.settings.color_scheme }} gradient"
+>
+    <div class="gff-video-wrapper">
+        {% unless section.settings.video == null %}
+            {{
+                section.settings.video
+                | video_tag:
+                    image_size: '1100x',
+                    autoplay: true,
+                    loop: true,
+                    controls: true,
+                    muted: true,
+                    preload: 'none'
+            }}
+        {% endunless %}
+        <div class="gff-video-content">
+          {% for block in section.blocks %}
+            {% case block.type %}
+                {% when '@app' %}
+                  <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                    {% render block %}
+                  </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "GFF | Hero Video",
+  "class": "gff-hero-video",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:sections.video.settings.video.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "GFF | Hero Video",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
