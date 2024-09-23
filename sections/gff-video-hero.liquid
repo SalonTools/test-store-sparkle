@@ -44,7 +44,7 @@
               <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                 {{ block.shopify_attributes }}
               >
-                {% render "#{block.type}", block: block %}
+                {% render "${block.type}", block: block %}
               </div>
             {% endif %}
           {% endfor %}
