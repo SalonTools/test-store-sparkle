@@ -12,6 +12,13 @@
     "gff_video_hero_HtQ6e8": {
       "type": "gff-video-hero",
       "blocks": {
+        "gff_heading_7keNcb": {
+          "type": "gff-heading",
+          "settings": {
+            "heading": "Heading Content",
+            "heading_size": "h1"
+          }
+        },
         "flexi_theme_library_buttons_block_bdU6Cp": {
           "type": "shopify://apps/flexi-theme-library/blocks/buttons-block/5a4df4d6-1efe-4f41-80b3-12e6a6deefaf",
           "settings": {
@@ -37,6 +44,7 @@
         }
       },
       "block_order": [
+        "gff_heading_7keNcb",
         "flexi_theme_library_buttons_block_bdU6Cp"
       ],
       "settings": {
@@ -44,7 +52,7 @@
         "height": 70,
         "maskOpacity": 0.2,
         "contentGap": 1,
-        "contentPadding": 1,
+        "contentPadding": 6.5,
         "contentAlignX": "center",
         "contentAlignY": "end",
         "color_scheme": "scheme-5"
