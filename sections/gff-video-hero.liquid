@@ -40,24 +40,17 @@
         {% endunless %}
         <div data-gff-section="{{ sectionId }}" class="gff-hero-video-content">
           {% for block in section.blocks %}
-            {% case block.type %}
-                {% when '@app' %}
-                  <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-                    {% render block %}
-                  </div>
-                {% when 'gff-button' %}
-                  <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                    {{ block.shopify_attributes }}
-                  >
-                    {% render 'gff-button', block: block %}
-                  </div>
-                {% when 'gff-heading' %}
-                  <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                    {{ block.shopify_attributes }}
-                  >
-                    {% render 'gff-heading', block: block %}
-                  </div>
-            {% endcase %}
+            {% if block.type == '@app' %}
+              <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                {% render block %}
+              </div>
+            {% else %}
+              <div data-gff-block="{{ block.id }}" class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                {% render block.type, block: block %}
+              </div>
+            {% endif %}
           {% endfor %}
         </div>
     </div>
@@ -185,6 +178,34 @@
           "id": "outline",
           "label": "Outline",
           "default": false
+        }
+      ]
+    },
+    {
+      "type": "gff-text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Content",
+          "default": "Text Content"
+        },
+        {
+          "type": "select",
+          "id": "displayAs",
+          "options": [
+            {
+              "value": "paragraph",
+              "label": "Paragraph"
+            },
+            {
+              "value": "subtitle",
+              "label": "Subtitle"
+            }
+          ],
+          "default": "paragraph",
+          "label": "Display As"
         }
       ]
     },

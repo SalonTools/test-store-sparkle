@@ -43,3 +43,9 @@
 .gff-heading-block .title {
     margin: 0;
 }
+.gff-text-block .gff-text-paragraph {
+    background: pink;
+}
+.gff-text-block .gff-text-subtitle {
+    background: pink;
+}
