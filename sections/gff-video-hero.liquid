@@ -14,6 +14,7 @@
     --gff-content-gap: {{ section.settings.contentGap }}rem;
     --gff-content-alignX: {{ section.settings.contentAlignX | default: "start" }};
     --gff-content-alignY: {{ section.settings.contentAlignY | default: "start" }};
+    --gff-section-padding: {{ section.settings.sectionPadding | default: 2 }}rem;
     }
 {%- endstyle -%}
 
@@ -25,16 +26,16 @@
         {% unless section.settings.video == null %}
             {{
             section.settings.video
-              | video_tag:
-                image_size: '1100x',
-                autoplay: true,
-                loop: true,
-                controls: false,
-                muted: true,
-                preload: 'none'
+            | video_tag:
+            image_size: '1100x',
+            autoplay: true,
+            loop: true,
+            controls: false,
+            muted: true,
+            preload: 'none'
             }}
         {% endunless %}
-        <div data-gff-section="{{ sectionId }}" class="gff-hero-video-content gff-blocks-column">
+        <div class="gff-hero-video-content gff-blocks-column">
             {% for block in section.blocks %}
                 {% case block.type %}
                     {% when '@app' %}
@@ -161,6 +162,15 @@
           "label": "Bottom"
         }
       ]
+    },
+    {
+      "type": "range",
+      "id": "sectionPadding",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "label": "Section Margin",
+      "default": 1.5
     },
     {
       "type": "color_scheme",

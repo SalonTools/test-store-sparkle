@@ -2,7 +2,8 @@
 .gff {
 }
 
-.gff-hero {
+.gff-section {
+    --gff-section-padding: 0;
     --gff-content-height: 50vh;
     --gff-content-padding: 2rem;
     --gff-content-gap: 1rem;
@@ -11,9 +12,8 @@
     --gff-mask-background: #000;
     --gff-mask-opacity: 0.3;
     --gff-text-shadow: 1px 1px 3px var(--gradient-background);
-}
 
-.gff-hero-video {
+    padding-block: var(--gff-section-padding);
 }
 
 .gff-hero-video-wrapper:after {
