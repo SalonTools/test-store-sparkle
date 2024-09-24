@@ -29,14 +29,7 @@
 
 .gff-hero-video-content {
     z-index: 2;
-    position: relative;
-    display: flex;
-    flex-direction: column;
     height: var(--gff-content-height);
-    align-items: var(--gff-content-alignX);
-    justify-content: var(--gff-content-alignY);
-    padding: var(--gff-content-padding);
-    gap: var(--gff-content-gap);
 }
 
 .gff-desktop .gff-hero-video-content {
@@ -64,16 +57,6 @@
     position: relative;
 }
 
-.gff-blocks-column {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: var(--gff-content-alignX);
-    justify-content: var(--gff-content-alignY);
-    padding: var(--gff-content-padding);
-    gap: var(--gff-content-gap);
-}
-
 /* `gff-image` used to contain img/video content resized to fit in the container */
 .gff-image {
     position: relative;
@@ -84,4 +67,20 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* `gff-blocks-column` used as container of blocks in a section */
+
+.gff-blocks-column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: var(--gff-content-alignX);
+    justify-content: var(--gff-content-alignY);
+    padding: var(--gff-content-padding);
+    gap: var(--gff-content-gap);
+}
+
+.gff-desktop .gff-blocks-column {
+    padding: calc(2 * var(--gff-content-padding));
 }

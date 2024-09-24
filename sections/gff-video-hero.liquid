@@ -34,7 +34,7 @@
                 preload: 'none'
             }}
         {% endunless %}
-        <div data-gff-section="{{ sectionId }}" class="gff-hero-video-content">
+        <div data-gff-section="{{ sectionId }}" class="gff-hero-video-content gff-blocks-column">
             {% for block in section.blocks %}
                 {% case block.type %}
                     {% when '@app' %}

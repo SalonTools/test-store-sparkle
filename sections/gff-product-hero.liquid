@@ -39,7 +39,7 @@
         class="gff-section gff-hero gff-hero-product color-{{ section.settings.color_scheme }} gradient"
 >
     {% if product != blank %}
-        <section class="gff-column">
+        <div data-gff-section="{{ sectionId }}"  class="gff-column gff-blocks-column">
           {% for block in section.blocks %}
             {% case block.type %}
               {% when '@app' %}
@@ -70,7 +70,7 @@
                 </div>
             {% endcase %}
           {% endfor %}
-        </section>
+        </div>
         <section class="gff-column gff-image">
             {% if image != blank %}
                 {{ image | image_url: width: 1500 | image_tag:
