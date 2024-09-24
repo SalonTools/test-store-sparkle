@@ -51,6 +51,27 @@
         "color_scheme": "scheme-5"
       }
     },
+    "gff_product_hero_yxBXfX": {
+      "type": "gff-product-hero",
+      "blocks": {
+        "gff_heading_jm44bY": {
+          "type": "gff-heading",
+          "settings": {
+            "heading": "{{ section.settings.product.title }}",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "gff_heading_jm44bY"
+      ],
+      "settings": {
+        "product": "hair-and-scalp-recovery-elixir",
+        "contentGap": 1,
+        "contentPadding": 2,
+        "color_scheme": ""
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -265,6 +286,7 @@
   },
   "order": [
     "gff_video_hero_HtQ6e8",
+    "gff_product_hero_yxBXfX",
     "image_banner",
     "rich_text",
     "featured_collection",
