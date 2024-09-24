@@ -67,9 +67,12 @@
       ],
       "settings": {
         "product": "hair-and-scalp-recovery-elixir",
+        "height": 70,
         "contentGap": 1,
         "contentPadding": 2,
-        "color_scheme": ""
+        "contentAlignX": "center",
+        "contentAlignY": "center",
+        "color_scheme": "scheme-2"
       }
     },
     "image_banner": {
