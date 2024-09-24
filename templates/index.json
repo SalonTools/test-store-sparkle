@@ -42,12 +42,13 @@
       ],
       "settings": {
         "video": "shopify://files/videos/landscape website.mp4",
-        "height": 70,
+        "height": 75,
         "maskOpacity": 0.2,
         "contentGap": 1,
         "contentPadding": 3,
         "contentAlignX": "start",
         "contentAlignY": "end",
+        "sectionPadding": 1.5,
         "color_scheme": "scheme-5"
       }
     },
@@ -72,6 +73,7 @@
         "contentPadding": 2,
         "contentAlignX": "center",
         "contentAlignY": "center",
+        "sectionPadding": 2.5,
         "color_scheme": "scheme-2"
       }
     },
