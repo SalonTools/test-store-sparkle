@@ -21,12 +21,6 @@
 
     assign sizes = "large grande"
 -%}
-{% comment %}{%- capture sizes -%}{% endcomment %}
-    {% comment %}(min-width: 1200px) calc((1200px - 100px) / 2),{% endcomment %}
-    {% comment %}(min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){% endcomment %}
-{% comment %}{%- endcapture -%}{% endcomment %}
-
-
 
 {%- style -%}
     [data-gff-section="{{ sectionId }}"] {
@@ -43,63 +37,64 @@
         data-gff-section="{{ sectionId }}"
         class="gff-section gff-hero gff-hero-product color-{{ section.settings.color_scheme }} gradient"
 >
-    {% if product != blank %}
-        <div class="gff-column gff-blocks-column">
-          {% for block in section.blocks %}
-            {% case block.type %}
-              {% when '@app' %}
-                <div data-gff-block="{{ block.id }}"
-                     class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-                  {% render block %}
-                </div>
-              {% when 'gff-heading' %}
-                <div data-gff-block="{{ block.id }}"
-                     class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                        {{ block.shopify_attributes }}
-                >
-                  {% render 'gff-heading', block: block, product: product %}
-                </div>
-              {% when 'gff-text' %}
-                <div data-gff-block="{{ block.id }}"
-                     class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                        {{ block.shopify_attributes }}
-                >
-                  {% render 'gff-text', block: block, product: product %}
-                </div>
-              {% when 'gff-button' %}
-                <div data-gff-block="{{ block.id }}"
-                     class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                        {{ block.shopify_attributes }}
-                >
-                  {% render 'gff-button', block: block, product: product %}
-                </div>
-            {% endcase %}
-          {% endfor %}
-        </div>
-        <section class="gff-column gff-image">
-            {% if image != blank %}
-                {{ image | image_url: width: 1500 | image_tag:
-                  sizes: sizes,
-                  widths: widths,
-                  loading: loading_strategy,
-                  fetchpriority: fetch_priority,
-                  alt: image.alt | escape
-                }}
-            {% elsif product_image != blank %}
-                {{ product_image | image_url: width: 1500 | image_tag:
-                  sizes: sizes,
-                  widths: widths,
-                  loading: loading_strategy,
-                  fetchpriority: fetch_priority,
-                  alt: product_image.alt | escape
-                }}
-            {% endif %}
-        </section>
+    <div class="gff-hero-wrapper">
+        {% if product != blank %}
+            <div class="gff-column gff-blocks-column">
+                {% for block in section.blocks %}
+                    {% case block.type %}
+                        {% when '@app' %}
+                            <div data-gff-block="{{ block.id }}"
+                                 class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                                {% render block %}
+                            </div>
+                        {% when 'gff-heading' %}
+                            <div data-gff-block="{{ block.id }}"
+                                 class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                    {{ block.shopify_attributes }}
+                            >
+                                {% render 'gff-heading', block: block, product: product %}
+                            </div>
+                        {% when 'gff-text' %}
+                            <div data-gff-block="{{ block.id }}"
+                                 class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                    {{ block.shopify_attributes }}
+                            >
+                                {% render 'gff-text', block: block, product: product %}
+                            </div>
+                        {% when 'gff-button' %}
+                            <div data-gff-block="{{ block.id }}"
+                                 class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                    {{ block.shopify_attributes }}
+                            >
+                                {% render 'gff-button', block: block, product: product %}
+                            </div>
+                    {% endcase %}
+                {% endfor %}
+            </div>
+            <section class="gff-column gff-image">
+                {% if image != blank %}
+                    {{ image | image_url: width: 1500 | image_tag:
+                    sizes: sizes,
+                    widths: widths,
+                    loading: loading_strategy,
+                    fetchpriority: fetch_priority,
+                    alt: image.alt | escape
+                    }}
+                {% elsif product_image != blank %}
+                    {{ product_image | image_url: width: 1500 | image_tag:
+                    sizes: sizes,
+                    widths: widths,
+                    loading: loading_strategy,
+                    fetchpriority: fetch_priority,
+                    alt: product_image.alt | escape
+                    }}
+                {% endif %}
+            </section>
 
-    {% else %}
-        <p>Select a product to continue customising.</p>
-    {% endif %}
-
+        {% else %}
+            <p>Select a product to continue customising.</p>
+        {% endif %}
+    </div>
 </section>
 
 {% schema %}

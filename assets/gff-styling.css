@@ -47,10 +47,12 @@
     font-size: 0.9em;
 }
 
-.gff-hero-product {
+.gff-hero-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: var(--gff-content-height);
+    width: var(--page-width);
+    margin: auto;
 }
 
 .gff-column {
