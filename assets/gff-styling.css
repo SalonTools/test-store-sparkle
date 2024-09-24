@@ -1,7 +1,8 @@
 /** /assets/gff-styling.css */
-.gff {}
+.gff {
+}
 
-.gff-hero-video {
+.gff-hero {
     --gff-content-height: 50vh;
     --gff-content-padding: 2rem;
     --gff-content-gap: 1rem;
@@ -11,15 +12,21 @@
     --gff-mask-opacity: 0.3;
     --gff-text-shadow: 1px 1px 3px var(--gradient-background);
 }
+
+.gff-hero-video {
+}
+
 .gff-hero-video-wrapper {
     position: relative;
 }
+
 .gff-hero-video-wrapper video {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .gff-hero-video-wrapper:after {
     content: '';
     position: absolute;
@@ -30,6 +37,7 @@
     background-color: var(--gff-mask-background);
     opacity: var(--gff-mask-opacity);
 }
+
 .gff-hero-video-content {
     z-index: 2;
     position: relative;
@@ -41,17 +49,38 @@
     padding: var(--gff-content-padding);
     gap: var(--gff-content-gap);
 }
+
 .gff-desktop .gff-hero-video-content {
     padding: calc(2 * var(--gff-content-padding));
 }
+
 .gff-text-content {
     margin: 0;
     line-height: 1;
     text-shadow: var(--gff-text-shadow);
 }
+
 .gff-text-block .gff-text-subtitle {
     text-transform: uppercase;
     font-size: 0.9em;
 }
 
-.gff-hero-product {}
+.gff-hero-product {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: var(--gff-content-height);
+}
+
+.gff-column {
+
+}
+
+.gff-blocks-column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: var(--gff-content-alignX);
+    justify-content: var(--gff-content-alignY);
+    padding: var(--gff-content-padding);
+    gap: var(--gff-content-gap);
+}
