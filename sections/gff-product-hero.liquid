@@ -1,0 +1,246 @@
+<!-- /sections/gff-hero-video.liquid -->
+{{ 'gff-styling.css' | asset_url | stylesheet_tag }}
+{{ 'gff-javascript.js' | asset_url | script_tag }}
+
+{%- liquid
+    assign sectionId = section.id
+    assign product = section.settings.product
+    assign selected_variant = product.selected_or_first_available_variant
+    assign product_image = product.images[0].src
+    assign image = section.settings.image
+
+    assign widths = '165, 360, 535, 750, 1070, 1500'
+
+    if section.index <= 3
+        assign loading_strategy = 'eager'
+        assign fetch_priority = 'high'
+    else
+        assign loading_strategy = 'lazy'
+        assign fetch_priority = 'auto'
+    endif
+-%}
+{%- capture sizes -%}
+    (min-width: 1200px) calc((1200px - 100px) / 2),
+    (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+{%- endcapture -%}
+
+{%- style -%}
+    [data-gff-section="{{ sectionId }}"] {
+    --gff-content-height: {{ section.settings.height }}vh;
+    --gff-mask-opacity: {{ section.settings.maskOpacity }};
+    --gff-content-padding: {{ section.settings.contentPadding }}rem;
+    --gff-content-gap: {{ section.settings.contentGap }}rem;
+    --gff-content-alignX: {{ section.settings.contentAlignX | default: "start" }};
+    --gff-content-alignY: {{ section.settings.contentAlignY | default: "start" }};
+    }
+{%- endstyle -%}
+
+<section
+        data-gff-section="{{ sectionId }}"
+        class="gff-section gff-hero-product color-{{ section.settings.color_scheme }} gradient"
+>
+    {% if product != blank %}
+        <section class="gff-column">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when '@app' %}
+                <div data-gff-block="{{ block.id }}"
+                     class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  {% render block %}
+                </div>
+              {% when 'gff-heading' %}
+                <div data-gff-block="{{ block.id }}"
+                     class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                        {{ block.shopify_attributes }}
+                >
+                  {% render 'gff-heading', block: block, product: product %}
+                </div>
+              {% when 'gff-text' %}
+                <div data-gff-block="{{ block.id }}"
+                     class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                        {{ block.shopify_attributes }}
+                >
+                  {% render 'gff-text', block: block, product: product %}
+                </div>
+              {% when 'gff-button' %}
+                <div data-gff-block="{{ block.id }}"
+                     class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                        {{ block.shopify_attributes }}
+                >
+                  {% render 'gff-button', block: block, product: product %}
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </section>
+        <section class="gff-column">
+            {% if image != blank %}
+                {{ image | image_url: width: 1500 | image_tag:
+                  sizes: sizes,
+                  widths: widths,
+                  loading: loading_strategy,
+                  fetchpriority: fetch_priority,
+                  alt: image.alt | escape
+                }}
+            {% elsif product_image != blank %}
+                {{ product_image | image_url: width: 1500 | image_tag:
+                  sizes: sizes,
+                  widths: widths,
+                  loading: loading_strategy,
+                  fetchpriority: fetch_priority,
+                  alt: product_image.alt | escape
+                }}
+            {% endif %}
+        </section>
+
+    {% else %}
+        <p>Select a product to continue customising.</p>
+    {% endif %}
+
+</section>
+
+{% schema %}
+{
+  "name": "GFF | Hero Video",
+  "class": "gff-hero-video",
+  "tag": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "range",
+      "id": "contentGap",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "label": "Content Gap",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "contentPadding",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "label": "Content Padding",
+      "default": 2
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Override Image"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "gff-button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Click Me"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "outline",
+          "label": "Outline",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "gff-text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Content",
+          "default": "Text Content"
+        },
+        {
+          "type": "select",
+          "id": "displayAs",
+          "options": [
+            {
+              "value": "paragraph",
+              "label": "Paragraph"
+            },
+            {
+              "value": "subtitle",
+              "label": "Subtitle"
+            }
+          ],
+          "default": "paragraph",
+          "label": "Display As"
+        }
+      ]
+    },
+    {
+      "type": "gff-heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Content",
+          "default": "Heading Content"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            },
+            {
+              "value": "hxl",
+              "label": "t:sections.all.heading_size.options__4.label"
+            },
+            {
+              "value": "hxxl",
+              "label": "t:sections.all.heading_size.options__5.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
