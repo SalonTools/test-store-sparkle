@@ -1,0 +1,127 @@
+<!-- /sections/gff-awards-section.liquid -->
+{%- liquid
+    assign sectionId = section.id
+
+    assign widths = '165, 360, 535, 750, 1070, 1200'
+
+    if section.index <= 3
+        assign loading_strategy = 'eager'
+        assign fetch_priority = 'high'
+    else
+        assign loading_strategy = 'lazy'
+        assign fetch_priority = 'auto'
+    endif
+
+    assign sizes = "medium large grande"
+-%}
+
+{%- style -%}
+    .gff-section[data-gff-section="{{ sectionId }}"] {
+    --gff-content-height: {{ section.settings.height }}px;
+    --gff-content-padding: {{ section.settings.contentPadding }}rem;
+    --gff-content-gap: {{ section.settings.contentGap }}rem;
+    --gff-content-alignX: {{ section.settings.contentAlignX | default: "start" }};
+    --gff-content-alignY: {{ section.settings.contentAlignY | default: "start" }};
+    --gff-section-padding: {{ section.settings.sectionPadding | default: 2 }}rem;
+    }
+{%- endstyle -%}
+
+<section
+        data-gff-section="{{ sectionId }}"
+        class="gff-section gff-awards color-{{ section.settings.color_scheme }} gradient"
+>
+    <gff-swiper class="gff-section-inner">
+
+        <!-- Slider main container -->
+        <div class="swiper gff-swiper"
+             {%- if section.settings.loop %} data-loop {% endif %}
+        >
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                {% for block in section.blocks %}
+                    <a class="swiper-slide scroll-trigger animate--slide-in"
+                       style=" --animation-order: {{ forloop.index }};"
+                       {%- if block.settings.link %} href="{{ block.settings.link }}" {% endif %}
+                        {{ block.shopify_attributes }}
+                    >
+                        {%- if block.settings.image != blank -%}
+                            {{ block.settings.image
+                                | image_url: height: section.settings.height
+                                | image_tag:
+                                    widths: widths,
+                                    sizes: sizes,
+                                    class: 'gff-award-card__image'
+                            }}
+                        {%- endif -%}
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination swiper-pagination-lock"></div>
+            <div class="swiper-button-prev gff-swiper-nav" aria-disabled="true"></div>
+            <div class="swiper-button-next gff-swiper-nav" aria-disabled="true"></div>
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </gff-swiper>
+</section>
+
+{% schema %}
+{
+  "name": "GFF | Awards",
+  "tag": "section",
+  "class": "gff-section-outer",
+  "disabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 100,
+      "max": 400,
+      "step": 50,
+      "label": "Container Height (px)",
+      "default": 250
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop Slides",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gff-award-column",
+      "name": "Award Column",
+      "settings": [
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GFF | Awards",
+      "settings": {
+      },
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

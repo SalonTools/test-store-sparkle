@@ -1,0 +1,43 @@
+/** /assets/gff-custom-elements.css */
+
+gff-swiper {
+    display: block;
+}
+.gff-swiper {
+    width: min(var(--page-width), 100%);
+    margin-inline: auto;
+    --swiper-theme-color: rgb(var(--color-background));
+
+    height: var(--gff-content-height);
+}
+.gff-mobile .gff-swiper {
+    height: calc(25px + var(--gff-content-height));
+    --swiper-pagination-top: calc(100% - 25px);
+    --swiper-pagination-bottom: 0;
+}
+.gff-swiper .swiper-wrapper {
+    height: var(--gff-content-height);
+}
+.gff-swiper a:not([href]) {
+    cursor: default;
+}
+.gff-swiper .gff-swiper-nav:not([aria-disabled="true"]) {
+    display: flex;
+}
+.gff-swiper:not(.swiper-initialized) .swiper-wrapper,
+.gff-swiper:has(.swiper-pagination.swiper-pagination-lock) .swiper-wrapper {
+    justify-content: center;
+}
+.gff-swiper .swiper-slide {
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1;
+    display: flex;
+    padding-inline: 5px;
+}
+.gff-award-card__image {
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+    margin-inline: auto;
+}

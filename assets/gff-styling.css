@@ -1,0 +1,120 @@
+/** /assets/gff-styling.css */
+
+.gff {
+}
+
+.gff-section {
+    --gff-section-padding: 0;
+    --gff-content-height: 50vh;
+    --gff-content-padding: 2rem;
+    --gff-content-gap: 1rem;
+    --gff-content-alignX: start;
+    --gff-content-alignY: start;
+    --gff-mask-background: #000;
+    --gff-mask-opacity: 0.3;
+    --gff-text-shadow: 1px 1px 3px var(--gradient-background);
+    --gff-text-lineHeight: 1;
+
+    padding-block: var(--gff-section-padding);
+}
+
+[data-gff-lh] {
+    --gff-text-lineHeight: attr(data-gff-lh type(<number>), 1);
+}
+
+.gff-hero-video-wrapper:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--gff-mask-background);
+    opacity: var(--gff-mask-opacity);
+}
+
+.gff-hero-video-content {
+    z-index: 2;
+    height: var(--gff-content-height);
+}
+
+.gff-desktop .gff-hero-video-content {
+    padding: calc(2 * var(--gff-content-padding));
+}
+
+.gff-text-content {
+    margin: 0;
+    line-height: var(--gff-text-lineHeight);
+    text-shadow: var(--gff-text-shadow);
+}
+
+.gff-text-content.title {
+    text-wrap: balance;
+}
+
+.gff-text-block .gff-text-subtitle {
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.gff-hero-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: var(--gff-content-height);
+}
+.gff-desktop .gff-hero-wrapper {
+    width: clamp(800px, 100vw, var(--page-width));
+    margin-inline: auto;
+}
+
+.gff-column {
+    position: relative;
+}
+
+/* `gff-image` used to contain img/video content resized to fit in the container */
+.gff-image {
+    position: relative;
+}
+
+.gff-image > img, .gff-image > video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: var(--gff-hero-objectFit, cover);
+    object-position: var(--gff-hero-objectPosition, center);
+}
+
+/* `gff-blocks-column` used as container of blocks in a section */
+
+.gff-blocks-column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: var(--gff-content-alignX);
+    justify-content: var(--gff-content-alignY);
+    padding: var(--gff-content-padding);
+    gap: var(--gff-content-gap);
+}
+
+.gff-desktop .gff-blocks-column {
+    padding: calc(2 * var(--gff-content-padding));
+}
+
+.gff-hero-product .gff-image {
+    order: var(--gff-hero-image-order, 1);
+}
+
+/* mobile layout for the hero product section */
+.gff-mobile .gff-hero-product .gff-image {
+    order: -1;
+    height: var(--gff-content-height);
+    --gff-hero-objectPosition: center;
+}
+.gff-mobile .gff-hero-wrapper {
+    grid-template-columns: 1fr;
+    height: auto;
+}
+
+
+/****  ****/
+.gff-awards {}

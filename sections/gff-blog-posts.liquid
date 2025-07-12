@@ -1,0 +1,89 @@
+<!-- /sections/gff-blog-posts.liquid -->
+
+{%- liquid
+    assign sectionId = section.id
+-%}
+
+{%- style -%}
+    .gff-section[data-gff-section="{{ sectionId }}"] {
+      --gff-content-alignX: center;
+    }
+{%- endstyle -%}
+
+<section
+        data-gff-section="{{ sectionId }}"
+        class="gff-section gff-blog-posts color-{{ section.settings.color_scheme }} gradient"
+>
+    <div class="gff-blocks-column gff-blog-posts-content">
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when '@app' %}
+            <div data-gff-block="{{ block.id }}"
+                 class="gff-app-block {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                {% render block %}
+            </div>
+        {% when 'gff-article' %}
+            <div data-gff-block="{{ block.id }}"
+                 class="gff-app-block gff-blog-post {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {{ block.shopify_attributes }}
+            >
+                {% render 'gff-article', block: block %}
+            </div>
+        {% endcase %}
+        {% endfor %}
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "GFF | Blog Posts",
+  "class": "gff-blog-posts",
+  "tag": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_even",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "gff-article",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Article"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GFF | Blog Posts",
+      "settings": {
+      },
+      "blocks": [
+      ]
+    }
+  ]
+}
+{% endschema %}

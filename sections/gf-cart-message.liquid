@@ -1,0 +1,92 @@
+{%- assign amount = section.settings.trigger | minus: cart.total_price | money_with_currency -%}
+
+{%- capture message -%}
+  {%- if section.settings.trigger <= cart.total_price -%}
+    {{ section.settings.messageAbove }}
+  {%- else -%}
+    {{ section.settings.messageBelow }}
+  {%- endif -%}
+{% endcapture -%}
+
+<!--
+  Cart value: {{ cart.total_price | money_with_currency }}
+  Strike value: {{ section.settings.trigger }}
+  Message: {{ message | replace: "AMOUNT", amount | escape }}
+  Amount: {{ amount }}
+-->
+
+{%- if message != blank %}
+  <div data-shopify-id="{{ section.id }}" class="title-wrapper--self-padded-mobile title-wrapper--no-top-margin">
+    <h2
+      style="padding: 1.5rem 0"
+      class="color-{{ section.settings.color_scheme }} center title inline-richtext {{ section.settings.heading_size }}"
+    >
+      {{ message | replace: 'AMOUNT', amount | escape }}
+    </h2>
+  </div>
+{%- endif -%}
+
+<script src="{{ 'gf-on-cart-update.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "GF Cart Message",
+  "class": "gf-cart-message",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "number",
+      "id": "trigger",
+      "label": "Trigger Price",
+      "default": 8000
+    },
+    {
+      "type": "inline_richtext",
+      "id": "messageBelow",
+      "label": "Message below trigger",
+      "default": "Spend just AMOUNT more to qualify for free UK delivery"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "messageAbove",
+      "label": "Message above trigger",
+      "default": "You have qualified for free UK delivery!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "GF Cart Message",
+      "settings": {
+        "messageAbove": "You have qualified for free UK delivery!",
+        "messageBelow": "Spend just AMOUNT more to qualify for free UK delivery",
+        "heading_size": "h2"
+      }
+    }
+  ]
+}
+{% endschema %}
